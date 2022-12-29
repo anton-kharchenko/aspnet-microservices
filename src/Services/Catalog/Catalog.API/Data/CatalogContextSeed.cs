@@ -8,7 +8,8 @@ public class CatalogContextSeed
     public static void SeedData(IMongoCollection<Product> productCollection)
     {
         var existProduct = productCollection.Find(p => true).Any();
-        if (!existProduct) productCollection.InsertManyAsync(GetPreconfiguredProducts());
+        if (!existProduct)
+            productCollection.InsertManyAsync(GetPreconfiguredProducts());
     }
 
     private static IEnumerable<Product> GetPreconfiguredProducts()
