@@ -18,7 +18,7 @@ public class ProductRepository : IProductRepository
         return await _catalogContext.Products.Find(p => true).ToListAsync().ConfigureAwait(false);
     }
 
-    public async Task<Product> GetProductAsync(string id)
+    public async Task<Product?> GetProductAsync(string id)
     {
         return await _catalogContext.Products.Find(p => p.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
     }
