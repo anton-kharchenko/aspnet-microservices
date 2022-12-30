@@ -5,6 +5,10 @@ namespace Catalog.API.Data;
 
 public class CatalogContextSeed
 {
+    /// <summary>
+    ///     Check if data is not exist return the list of mock data.
+    /// </summary>
+    /// <param name="productCollection">the existed product collection</param>
     public static void SeedData(IMongoCollection<Product> productCollection)
     {
         var existProduct = productCollection.Find(p => true).Any();
@@ -12,6 +16,10 @@ public class CatalogContextSeed
             productCollection.InsertManyAsync(GetPreconfiguredProducts());
     }
 
+    /// <summary>
+    ///     The list of mock product data.
+    /// </summary>
+    /// <returns>The list of product</returns>
     private static IEnumerable<Product> GetPreconfiguredProducts()
     {
         return new List<Product>

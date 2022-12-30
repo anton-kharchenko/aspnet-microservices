@@ -3,8 +3,13 @@ using MongoDB.Driver;
 
 namespace Catalog.API.Data;
 
+/// <inheritdoc />
 public class CatalogContext : ICatalogContext
 {
+    /// <summary>
+    ///     .ctor
+    /// </summary>
+    /// <param name="configuration">Application configuration</param>
     public CatalogContext(IConfiguration configuration)
     {
         var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
@@ -13,5 +18,6 @@ public class CatalogContext : ICatalogContext
         CatalogContextSeed.SeedData(Products);
     }
 
+    /// <inheritdoc />
     public IMongoCollection<Product> Products { get; }
 }
