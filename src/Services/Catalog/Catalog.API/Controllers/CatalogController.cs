@@ -34,8 +34,7 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
-        var products = await _productRepository.GetProductsAsync().ConfigureAwait(false);
-        return Ok(products);
+        return Ok(await _productRepository.GetProductsAsync().ConfigureAwait(false));
     }
 
     /// <summary>
@@ -64,8 +63,7 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
     {
-        var products = await _productRepository.GetProductByCategoryAsync(category).ConfigureAwait(false);
-        return Ok(products);
+        return Ok(await _productRepository.GetProductByCategoryAsync(category).ConfigureAwait(false));
     }
 
     /// <summary>
