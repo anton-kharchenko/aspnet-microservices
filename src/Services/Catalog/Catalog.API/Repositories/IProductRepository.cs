@@ -32,7 +32,7 @@ public interface IProductRepository
     /// </summary>
     /// <param name="categoryName">The product category name.</param>
     /// <returns>The list of products.</returns>
-    Task<IEnumerable<Product>> GetProductByCategoryAsync(string categoryName);
+    Task<IEnumerable<Product>> GetProductByCategoryNameAsync(string categoryName);
 
     /// <summary>
     ///     Create a new product

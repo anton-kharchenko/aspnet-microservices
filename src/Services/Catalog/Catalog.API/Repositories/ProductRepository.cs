@@ -39,7 +39,7 @@ public class ProductRepository : IProductRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<Product>> GetProductByCategoryAsync(string categoryName)
+    public async Task<IEnumerable<Product>> GetProductByCategoryNameAsync(string categoryName)
     {
         var filter = Builders<Product>.Filter.Eq(p => p.Category, categoryName);
 

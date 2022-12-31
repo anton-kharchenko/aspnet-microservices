@@ -44,8 +44,8 @@ public class CatalogController : ControllerBase
     /// <returns>The list of products.</returns>
     [HttpGet("{id:length(24)}", Name = "GetProduct")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductById(string id)
+    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Product>> GetProductById(string id)
     {
         var product = await _productRepository.GetProductAsync(id).ConfigureAwait(false);
         if (product is not null) return Ok(product);
@@ -61,9 +61,9 @@ public class CatalogController : ControllerBase
     [HttpGet]
     [Route("[action]/{category}", Name = "GetProductByCategory")]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategoryName(string category)
     {
-        return Ok(await _productRepository.GetProductByCategoryAsync(category).ConfigureAwait(false));
+        return Ok(await _productRepository.GetProductByCategoryNameAsync(category).ConfigureAwait(false));
     }
 
     /// <summary>
