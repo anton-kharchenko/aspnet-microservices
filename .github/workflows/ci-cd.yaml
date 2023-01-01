@@ -18,13 +18,13 @@ jobs:
           dotnet-version: '7.0.x'
           
       - name: Restore dependencies ⚒️
-        run: dotnet restore .\aspnet-microservices.sln
+        run: dotnet restore ..\..\aspnet-microservices.sln
       
       - name: Build app 🚀
-        run: dotnet build .\aspnet-microservices.sln -c Release --no-restore
+        run: dotnet build ..\..\aspnet-microservices.sln -c Release --no-restore
 
       - name: Run automated tests 🧪
-        run: dotnet test .\aspnet-microservices.sln -c Release --no-build
+        run: dotnet test ..\..\aspnet-microservices.sln -c Release --no-build
 
       - name: Publish app
-        run: dotnet publish .\aspnet-microservices.sln -c Release -o ./out
+        run: dotnet publish ..\..\aspnet-microservices.sln -c Release -o ./out
