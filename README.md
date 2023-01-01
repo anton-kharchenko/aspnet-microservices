@@ -1,4 +1,5 @@
 # ASP.NET Microservices
+[![Continuos Integration and Deployment](https://github.com/anonymousStyleKiller/aspnet-microservices/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/anonymousStyleKiller/aspnet-microservices/actions/workflows/ci-cd.yaml)
 
 See the overall picture of **implementations on microservices with .net tools** on real-world **e-commerce microservices** project;
 
