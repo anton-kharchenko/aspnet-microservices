@@ -18,8 +18,7 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Start Mongo Db
-        run: |
-        docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d 
+        run: docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d 
 
       - name: Restore dependencies ⚒️
         run: dotnet restore
