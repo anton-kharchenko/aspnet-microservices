@@ -18,7 +18,7 @@ public class CatalogController : ControllerBase
     /// <summary>
     ///     .ctor
     /// </summary>
-    /// <param name="productRepository">Repository for interaction with db.</param>
+    /// <param name="productRepository">Repository for interaction with Mongo db.</param>
     /// <param name="logger">Logger.</param>
     public CatalogController(IProductRepository productRepository, ILogger<CatalogController> logger)
     {
@@ -32,7 +32,7 @@ public class CatalogController : ControllerBase
     /// <returns>The list of products.</returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsAsync()
     {
         return Ok(await _productRepository.GetProductsAsync().ConfigureAwait(false));
     }
@@ -45,9 +45,9 @@ public class CatalogController : ControllerBase
     [HttpGet("{id:length(24)}", Name = "GetProduct")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Product>> GetProductById(string id)
+    public async Task<ActionResult<Product>> GetProductByIdAsync(string id)
     {
-        var product = await _productRepository.GetProductAsync(id).ConfigureAwait(false);
+        var product = await _productRepository.GetProductByIdAsync(id).ConfigureAwait(false);
         if (product is not null) return Ok(product);
         _logger.LogError($"Product with id: {id}, not found.");
         return NotFound();
@@ -61,7 +61,7 @@ public class CatalogController : ControllerBase
     [HttpGet]
     [Route("[action]/{category}", Name = "GetProductByCategory")]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategoryName(string category)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategoryNameAsync(string category)
     {
         return Ok(await _productRepository.GetProductByCategoryNameAsync(category).ConfigureAwait(false));
     }
@@ -73,7 +73,7 @@ public class CatalogController : ControllerBase
     /// <returns>A new product.</returns>
     [HttpPost]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+    public async Task<ActionResult<Product>> CreateProductAsync([FromBody] Product product)
     {
         await _productRepository.CreateProductAsync(product);
 
@@ -86,7 +86,7 @@ public class CatalogController : ControllerBase
     /// <param name="product">Updated body of th product.</param>
     [HttpPut]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+    public async Task<IActionResult> UpdateProductAsync([FromBody] Product product)
     {
         return Ok(await _productRepository.UpdateProductAsync(product).ConfigureAwait(false));
     }
@@ -97,7 +97,7 @@ public class CatalogController : ControllerBase
     /// <param name="id">ID of product.</param>
     [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> DeleteProductById(string id)
+    public async Task<IActionResult> DeleteProductByIdAsync(string id)
     {
         return Ok(await _productRepository.DeleteProductAsync(id).ConfigureAwait(false));
     }
