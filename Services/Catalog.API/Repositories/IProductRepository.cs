@@ -18,7 +18,7 @@ public interface IProductRepository
     /// </summary>
     /// <param name="id">Id of product.</param>
     /// <returns>The product.</returns>
-    Task<Product?> GetProductAsync(string id);
+    Task<Product?> GetProductByIdAsync(string id);
 
     /// <summary>
     ///     Gets the product associated with the product name.

@@ -32,7 +32,7 @@ public class CatalogControllerTests
 
         // Act
 
-        var result = await _catalogController.GetProducts().ConfigureAwait(false);
+        var result = await _catalogController.GetProductsAsync().ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
@@ -51,11 +51,11 @@ public class CatalogControllerTests
         // Arrange
         var product = _fixture.Create<Product>();
         var id = _fixture.Create<string>();
-        _productRepository.Setup(x => x.GetProductAsync(id)).ReturnsAsync(product);
+        _productRepository.Setup(x => x.GetProductByIdAsync(id)).ReturnsAsync(product);
 
         // Act
 
-        var result = await _catalogController.GetProductById(id).ConfigureAwait(false);
+        var result = await _catalogController.GetProductByIdAsync(id).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
@@ -65,7 +65,7 @@ public class CatalogControllerTests
             .Should()
             .NotBeNull()
             .And.BeOfType(product.GetType());
-        _productRepository.Verify(x => x.GetProductAsync(id), Times.Once);
+        _productRepository.Verify(x => x.GetProductByIdAsync(id), Times.Once);
     }
 
     [Fact]
@@ -74,16 +74,16 @@ public class CatalogControllerTests
         // Arrange
         Product? product = null;
         var id = _fixture.Create<string>();
-        _productRepository.Setup(x => x.GetProductAsync(id)).ReturnsAsync(product);
+        _productRepository.Setup(x => x.GetProductByIdAsync(id)).ReturnsAsync(product);
 
         // Act
 
-        var result = await _catalogController.GetProductById(id).ConfigureAwait(false);
+        var result = await _catalogController.GetProductByIdAsync(id).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
         result.Result.Should().BeAssignableTo<NotFoundResult>();
-        _productRepository.Verify(x => x.GetProductAsync(id), Times.Once);
+        _productRepository.Verify(x => x.GetProductByIdAsync(id), Times.Once);
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public class CatalogControllerTests
 
         // Act
 
-        var result = await _catalogController.GetProductByCategoryName(categoryName).ConfigureAwait(false);
+        var result = await _catalogController.GetProductByCategoryNameAsync(categoryName).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
@@ -117,7 +117,7 @@ public class CatalogControllerTests
         _productRepository.Setup(x => x.CreateProductAsync(request));
 
         // Act
-        var result = await _catalogController.CreateProduct(request).ConfigureAwait(false);
+        var result = await _catalogController.CreateProductAsync(request).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
@@ -133,7 +133,7 @@ public class CatalogControllerTests
         _productRepository.Setup(x => x.UpdateProductAsync(request));
 
         // Act
-        var result = await _catalogController.UpdateProduct(request).ConfigureAwait(false);
+        var result = await _catalogController.UpdateProductAsync(request).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
@@ -149,7 +149,7 @@ public class CatalogControllerTests
         _productRepository.Setup(x => x.DeleteProductAsync(id)).ReturnsAsync(true);
 
         // Act
-        var result = await _catalogController.DeleteProductById(id).ConfigureAwait(false);
+        var result = await _catalogController.DeleteProductByIdAsync(id).ConfigureAwait(false);
 
         // Assert
         result.Should().NotBeNull();
