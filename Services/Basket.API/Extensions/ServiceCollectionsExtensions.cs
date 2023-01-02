@@ -1,4 +1,6 @@
-﻿namespace Basket.API.Extensions;
+﻿using Basket.API.Repositories;
+
+namespace Basket.API.Extensions;
 
 public static class ServiceCollectionsExtensions
 {
@@ -14,5 +16,10 @@ public static class ServiceCollectionsExtensions
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddTransient<IBasketRepository, BasketRepository>();
     }
 }
