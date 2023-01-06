@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Basket.API.Controllers;
 
 /// <summary>
-///     Basket controller. Endpoints for swagger.
+///     Basket controller. Endpoints for interaction with application.
 /// </summary>
 [ApiController]
 [Route("api/v1/[controller]")]

@@ -4,15 +4,21 @@ using Npgsql;
 
 namespace Discount.API.Repositories;
 
+/// <inheritdoc />
 public class DiscountRepository : IDiscountRepository
 {
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        /// .ctor
+        /// </summary>
+        /// <param name="configuration">Configuration of application</param>
         public DiscountRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <inheritdoc />
         public async Task<Coupon> GetDiscountAsync(string productName)
         {
             await using var connection = new NpgsqlConnection
@@ -28,6 +34,7 @@ public class DiscountRepository : IDiscountRepository
             return coupon;
         }
 
+        /// <inheritdoc />
         public async Task<bool> CreateDiscountAsync(Coupon coupon)
         {
             await using var connection = new NpgsqlConnection
@@ -41,6 +48,7 @@ public class DiscountRepository : IDiscountRepository
             return affected != 0;
         }
 
+        /// <inheritdoc />
         public async Task<bool> UpdateDiscountAsync(Coupon coupon)
         {
             await using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
@@ -52,6 +60,7 @@ public class DiscountRepository : IDiscountRepository
             return affected != 0;
         }
 
+        /// <inheritdoc />
         public async Task<bool> DeleteDiscountAsync(string productName)
         {
             await using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));

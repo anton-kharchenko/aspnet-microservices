@@ -3,6 +3,7 @@ using Catalog.API.Entities;
 namespace Catalog.API.Repositories;
 
 /// <summary>
+///     Working with product table. Data base - MongoDb.
 ///     API layer for communication between the application and DB. Implementation of Repository pattern.
 /// </summary>
 public interface IProductRepository

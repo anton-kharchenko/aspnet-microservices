@@ -32,7 +32,6 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@aspnetrun.com
       - PGADMIN_DEFAULT_PASSWORD=admin1234
-      - DatabaseSettings:ConnectionString="Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
     restart: always
     ports:
       - "5050:80"

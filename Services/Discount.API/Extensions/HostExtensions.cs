@@ -2,8 +2,18 @@
 
 namespace Discount.API.Extensions;
 
+/// <summary>
+/// The static extension class that contains the methods that work with IHost. 
+/// </summary>
 public static class HostExtensions
 {
+    /// <summary>
+    /// Create first migration for PostgresSQL if any coupons doesn't exist.
+    /// Will clear the DB and then add the 2 base coupons rows 
+    /// </summary>
+    /// <param name="host">The interface that will be extended. Executed when the application is starting.</param>
+    /// <param name="retry">The counter of trying to execute first migration. Counter must be less that 50.</param>
+    /// <typeparam name="TContext">The class that will be logging</typeparam>
     public static void MigrateDatabase<TContext>(this IHost host, int? retry = 0)
     {
         var retryForAvailability = retry!.Value;
