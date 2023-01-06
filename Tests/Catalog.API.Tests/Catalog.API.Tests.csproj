@@ -26,6 +26,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Services\Catalog.API\Catalog.API.csproj" />
+        <ProjectReference Include="..\Base.Tests\Base.Tests.csproj" />
     </ItemGroup>
 
 </Project>
