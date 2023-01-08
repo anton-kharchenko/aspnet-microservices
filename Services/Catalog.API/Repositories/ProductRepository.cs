@@ -23,7 +23,7 @@ public class ProductRepository : IProductRepository
     {
         return await _catalogContext.Products.Find(p => true).ToListAsync().ConfigureAwait(false);
     }
-
+    
     /// <inheritdoc />
     public async Task<Product?> GetProductByIdAsync(string id)
     {
