@@ -7,11 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="Dapper" Version="2.0.123" />
+        <PackageReference Include="Npgsql" Version="7.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Protos\discount.proto" GrpServices="Server" />
     </ItemGroup>
 
 </Project>
