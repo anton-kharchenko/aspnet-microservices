@@ -6,12 +6,21 @@ using Grpc.Core;
 
 namespace Discount.gRPC.Services;
 
+/// <summary>
+/// Discount service for gRPC connections 
+/// </summary>
 public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
 {
     private readonly IDiscountRepository _repository;
     private readonly ILogger<DiscountService> _logger;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// .ctor
+    /// </summary>
+    /// <param name="repository">Discount API abstractions for interactions with DB.</param>
+    /// <param name="logger">Base logger for writing log information.</param>
+    /// <param name="mapper">Mapping service.</param>
     public DiscountService(IDiscountRepository repository, ILogger<DiscountService> logger, IMapper mapper)
     {
         _repository = repository;
@@ -19,6 +28,13 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         _mapper = mapper;
     }
 
+    /// <summary>
+    ///  Get the discount by the product name.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    /// <exception cref="RpcException"></exception>
     public override async Task<CouponModel> GetDiscountAsync(GetDiscountRequest request, ServerCallContext context)
     {
         var coupon = await _repository.GetDiscountAsync(request.ProductName).ConfigureAwait(false);
@@ -30,6 +46,12 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         return _mapper.Map<CouponModel>(coupon);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public override async Task<CouponModel> CreateDiscountAsync(CreateDiscountRequest request, ServerCallContext context)
     {
         var coupon = _mapper.Map<Coupon>(request.CouponModel);
@@ -38,6 +60,12 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         return _mapper.Map<CouponModel>(coupon);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public override async Task<CouponModel> UpdateDiscountAsync(UpdateDiscountRequest request, ServerCallContext context)
     {
         var coupon = _mapper.Map<Coupon>(request.CouponModel);
@@ -46,6 +74,12 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         return _mapper.Map<CouponModel>(coupon);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public override async Task<DeleteDiscountResponse> DeleteDiscountAsync(DeleteDiscountRequest request, ServerCallContext context)
     {
         var deleted = await _repository.DeleteDiscountAsync(request.ProductName);

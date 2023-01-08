@@ -12,7 +12,7 @@ public interface IBasketRepository
     /// </summary>
     /// <param name="userName">The user name</param>
     /// <returns>The user's basket</returns>
-    Task<ShoppingCart?> GetBasketAsync(string userName);
+    Task<ShoppingCart?> GetBasketAsync(string? userName);
     
     /// <summary>
     /// Update the basket
