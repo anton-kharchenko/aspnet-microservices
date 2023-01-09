@@ -2,6 +2,7 @@ using AutoFixture;
 using Basket.API.Controllers;
 using Basket.API.Entities;
 using Basket.API.Repositories;
+using Basket.API.Services;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -13,26 +14,24 @@ public class BasketControllerTests
     private readonly BasketController _basketController;
     private readonly IFixture _fixture;
     private readonly Mock<IBasketRepository> _basketRepository;
-    
+
     public BasketControllerTests()
     {
         _fixture = new Fixture();
         _basketRepository = _fixture.Freeze<Mock<IBasketRepository>>();
-        _basketController =  new BasketController(_basketRepository.Object);
+        var discountGrpcService = _fixture.Freeze<Mock<DiscountGrpcService>>();
+        _basketController =  new BasketController(_basketRepository.Object, discountGrpcService.Object);
     }
     
     [Fact]
     public async Task GetBasketShouldReturnOkResponseWhenDataFound()
     {
-        // Arrange
         var basket = _fixture.Create<ShoppingCart>(); 
         var userName = _fixture.Create<string>();
         _basketRepository.Setup(i => i.GetBasketAsync(userName)).ReturnsAsync(basket);
 
-        // Act
         var result = await _basketController.GetBasketAsync(userName).ConfigureAwait(false);
         
-        // Assert
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -47,14 +46,11 @@ public class BasketControllerTests
     [Fact]
     public async Task UpdateBasketShouldReturnOkResponseWhenDataValid()
     {
-        // Arrange
         var basket = _fixture.Create<ShoppingCart>();
         _basketRepository.Setup(i => i.UpdateBasketAsync(basket)).ReturnsAsync(basket);
 
-        // Act
         var result = await _basketController.UpdateBasketAsync(basket).ConfigureAwait(false);
         
-        // Assert
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();

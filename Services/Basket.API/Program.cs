@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwagger();
 builder.Services.AddRedis(builder.Configuration);
+builder.Services.AddGrpcClient(builder.Configuration);
 builder.Services.AddRepositories();
 
 var app = builder.Build();

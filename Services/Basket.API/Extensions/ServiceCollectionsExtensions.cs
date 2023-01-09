@@ -1,4 +1,6 @@
 ﻿using Basket.API.Repositories;
+using Basket.API.Services;
+using Discount.gRPC.Protos;
 
 namespace Basket.API.Extensions;
 
@@ -33,5 +35,16 @@ public static class ServiceCollectionsExtensions
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddTransient<IBasketRepository, BasketRepository>();
+    }
+
+    /// <summary>
+    /// Register gRPC client project for communicate Basket.API with Discount.API
+    /// </summary>
+    public static void AddGrpcClient(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o=>
+            o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]!)
+        );
+        services.AddScoped<DiscountGrpcService>();
     }
 }
