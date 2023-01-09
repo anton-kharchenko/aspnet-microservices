@@ -1,4 +1,5 @@
-﻿using Discount.gRPC.Repositories;
+﻿using System.Reflection;
+using Discount.gRPC.Repositories;
 
 namespace Discount.gRPC.Extensions;
 
@@ -17,8 +18,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDiscountRepository, DiscountRepository>();
     }
 
+    /// <summary>
+    /// Add Mapping services with <see href="https://automapper.org/"> AutoMapper </see>
+    /// </summary>
+    /// <param name="services">The Services collection that existed in application</param>
     public static void AddMapper(this IServiceCollection services)
     {
-        services.AddMapper();
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
 }

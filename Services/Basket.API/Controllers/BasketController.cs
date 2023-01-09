@@ -30,7 +30,7 @@ public class BasketController : ControllerBase
     /// <returns>Shopping cart.</returns>
     [HttpGet("{userName}", Name = "GetBasketAsync")]
     [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ShoppingCart>> GetBasketAsync(string userName)
+    public async Task<ActionResult<ShoppingCart>> GetBasketAsync(string? userName)
     {
        var basket =  await _repository.GetBasketAsync(userName).ConfigureAwait(false);
        return Ok(basket ?? new ShoppingCart(userName));

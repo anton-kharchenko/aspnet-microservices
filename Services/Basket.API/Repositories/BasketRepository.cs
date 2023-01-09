@@ -32,7 +32,7 @@ public class BasketRepository : IBasketRepository
     }
 
     /// <inheritdoc />
-    public async Task<ShoppingCart?> GetBasketAsync(string userName)
+    public async Task<ShoppingCart?> GetBasketAsync(string? userName)
     {
         var basket =  await _redisCache.GetStringAsync(userName).ConfigureAwait(false);
         return string.IsNullOrWhiteSpace(basket)
