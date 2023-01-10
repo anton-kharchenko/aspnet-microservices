@@ -41,7 +41,7 @@ public class BasketController : ControllerBase
     }
 
     /// <summary>
-    /// Create basket if it's exist. Update basket if it exist.
+    /// Create basket if it's exist. Update basket if it exist. Also return price with discount if it has.
     /// </summary>
     /// <param name="basket">The basket that must be update.</param>
     /// <returns>Shopping cart.</returns>
