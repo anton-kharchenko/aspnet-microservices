@@ -2,7 +2,6 @@
 using MediatR;
 using ValidationException = FluentValidation.ValidationException;
 
-
 namespace Ordering.Application.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
