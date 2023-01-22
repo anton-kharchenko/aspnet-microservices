@@ -3,13 +3,13 @@
 namespace Discount.API.Extensions;
 
 /// <summary>
-/// The static extension class that contains the methods that work with IHost. 
+/// The static extension class that contains the methods that work with IHost.
 /// </summary>
 public static class HostExtensions
 {
     /// <summary>
     /// Create first migration for PostgresSQL if any coupons doesn't exist.
-    /// Will clear the DB and then add the 2 base coupons rows 
+    /// Will clear the DB and then add the 2 base coupons rows
     /// </summary>
     /// <param name="host">The interface that will be extended. Executed when the application is starting.</param>
     /// <param name="retry">The counter of trying to execute first migration. Counter must be less that 50.</param>
@@ -26,7 +26,7 @@ public static class HostExtensions
 
         try
         {
-            logger.LogInformation("Migrating postgres started"); 
+            logger.LogInformation("Migrating postgres started");
             using var connection = new NpgsqlConnection
                 (configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             connection.Open();
@@ -35,11 +35,11 @@ public static class HostExtensions
             {
                 Connection = connection
             };
-            
+
             command.CommandText = "DROP TABLE IF EXISTS Coupon";
             command.ExecuteNonQuery();
 
-            command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 
+            command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY,
                                                                 ProductName VARCHAR(24) NOT NULL,
                                                                 Description TEXT,
                                                                 Amount INT)";

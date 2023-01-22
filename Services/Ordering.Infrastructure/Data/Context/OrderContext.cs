@@ -15,7 +15,6 @@ public class OrderContext : DbContext
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         foreach (var entry in ChangeTracker.Entries<EntityBase>())
-        {
             switch (entry.State)
             {
                 case EntityState.Added:
@@ -36,7 +35,6 @@ public class OrderContext : DbContext
                     Console.WriteLine("Something happened");
                     break;
             }
-        }
 
         return base.SaveChangesAsync(cancellationToken);
     }

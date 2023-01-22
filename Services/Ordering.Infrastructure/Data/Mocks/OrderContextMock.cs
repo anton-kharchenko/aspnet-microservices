@@ -2,7 +2,7 @@
 using Ordering.Domain.Entities;
 using Ordering.Infrastructure.Data.Context;
 
-namespace Ordering.Infrastructure.Data.Mock;
+namespace Ordering.Infrastructure.Data.Mocks;
 
 public class OrderContextMock
 {
@@ -21,12 +21,12 @@ public class OrderContextMock
         {
             new()
             {
-                UserName = "Anton", 
+                UserName = "Anton",
                 FirstName = "Anton",
-                LastName = "Kharhcenko", 
+                LastName = "Kharhcenko",
                 EmailAddress = "gumb1t97@gmail.com",
-                AddressLine = "Sofia", 
-                Country = "Bulguria", 
+                AddressLine = "Sofia",
+                Country = "Bulguria",
                 TotalPrice = 350
             }
         };

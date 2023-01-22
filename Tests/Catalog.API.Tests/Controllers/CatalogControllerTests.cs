@@ -28,9 +28,9 @@ public class CatalogControllerTests
     {
         var products = _fixture.Create<IEnumerable<Product>>();
         _productRepository.Setup(x => x.GetProductsAsync()).ReturnsAsync(products);
-        
+
         var result = await _catalogController.GetProductsAsync().ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<IEnumerable<Product>>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -47,9 +47,9 @@ public class CatalogControllerTests
         var product = _fixture.Create<Product>();
         var id = _fixture.Create<string>();
         _productRepository.Setup(x => x.GetProductByIdAsync(id)).ReturnsAsync(product);
-        
+
         var result = await _catalogController.GetProductByIdAsync(id).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<Product?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -66,9 +66,9 @@ public class CatalogControllerTests
         Product? product = null;
         var id = _fixture.Create<string>();
         _productRepository.Setup(x => x.GetProductByIdAsync(id)).ReturnsAsync(product);
-        
+
         var result = await _catalogController.GetProductByIdAsync(id).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Result.Should().BeAssignableTo<NotFoundResult>();
         _productRepository.Verify(x => x.GetProductByIdAsync(id), Times.Once);
@@ -80,9 +80,9 @@ public class CatalogControllerTests
         var products = _fixture.Create<IEnumerable<Product>>();
         var categoryName = _fixture.Create<string>();
         _productRepository.Setup(x => x.GetProductByCategoryNameAsync(categoryName)).ReturnsAsync(products);
-        
+
         var result = await _catalogController.GetProductByCategoryNameAsync(categoryName).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<IEnumerable<Product>>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -98,9 +98,9 @@ public class CatalogControllerTests
     {
         var request = _fixture.Create<Product>();
         _productRepository.Setup(x => x.CreateProductAsync(request));
-        
+
         var result = await _catalogController.CreateProductAsync(request).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<Product>>();
         result.Result.Should().BeAssignableTo<CreatedAtRouteResult>();
@@ -112,9 +112,9 @@ public class CatalogControllerTests
     {
         var request = _fixture.Create<Product>();
         _productRepository.Setup(x => x.UpdateProductAsync(request));
-        
+
         var result = await _catalogController.UpdateProductAsync(request).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult>();
         _productRepository.Verify(x => x.UpdateProductAsync(request), Times.Once);
@@ -125,9 +125,9 @@ public class CatalogControllerTests
     {
         var id = _fixture.Create<string>();
         _productRepository.Setup(x => x.DeleteProductAsync(id)).ReturnsAsync(true);
-        
+
         var result = await _catalogController.DeleteProductByIdAsync(id).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult>();
     }

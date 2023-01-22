@@ -75,7 +75,7 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Product>> CreateProductAsync([FromBody] Product product)
     {
-        await _productRepository.CreateProductAsync(product);
+        await _productRepository.CreateProductAsync(product).ConfigureAwait(false);
 
         return CreatedAtRoute("GetProduct", new { id = product.Id }, product);
     }

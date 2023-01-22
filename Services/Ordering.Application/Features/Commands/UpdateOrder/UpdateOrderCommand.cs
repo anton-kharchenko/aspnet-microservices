@@ -8,7 +8,7 @@ public class UpdateOrderCommand : IRequest
     public string UserName { get; set; } = default!;
     public decimal TotalPrice { get; set; }
 
-    // BillingAddress 
+    // BillingAddress
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public string EmailAddress { get; set; } = default!;

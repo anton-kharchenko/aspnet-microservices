@@ -13,7 +13,7 @@ public class DiscountControllerTests
     private readonly DiscountController _discountController;
     private readonly IFixture _fixture;
     private readonly Mock<IDiscountRepository> _discountRepository;
-    
+
     public DiscountControllerTests()
     {
         _fixture = new Fixture();
@@ -29,7 +29,7 @@ public class DiscountControllerTests
         _discountRepository.Setup(x => x.GetDiscountAsync(discount)).ReturnsAsync(coupon);
 
         var result = await _discountController.GetDiscountAsync(discount).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<Coupon>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -39,7 +39,7 @@ public class DiscountControllerTests
             .And.BeOfType(coupon.GetType());
         _discountRepository.Verify(e => e.GetDiscountAsync(discount), Times.Once);
     }
-    
+
     [Fact]
     public async Task CreateDiscountShouldReturnNewCoupon()
     {
@@ -47,12 +47,12 @@ public class DiscountControllerTests
         _discountRepository.Setup(x => x.CreateDiscountAsync(coupon)).ReturnsAsync(true);
 
         var result = await _discountController.CreateDiscountAsync(coupon).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<Coupon>>();
         _discountRepository.Verify(e => e.CreateDiscountAsync(coupon), Times.Once);
     }
-    
+
     [Fact]
     public async Task UpdateDiscountShouldReturnUpdatedCoupon()
     {
@@ -60,13 +60,13 @@ public class DiscountControllerTests
         _discountRepository.Setup(x => x.UpdateDiscountAsync(coupon)).ReturnsAsync(true);
 
         var result = await _discountController.UpdateDiscountAsync(coupon).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<Coupon>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
         _discountRepository.Verify(e => e.UpdateDiscountAsync(coupon), Times.Once);
     }
-    
+
     [Fact]
     public async Task DeleteDiscountShouldReturnNewCoupon()
     {
@@ -74,7 +74,7 @@ public class DiscountControllerTests
         _discountRepository.Setup(x => x.DeleteDiscountAsync(couponName)).ReturnsAsync(true);
 
         var result = await _discountController.DeleteDiscountAsync(couponName).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<bool>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();

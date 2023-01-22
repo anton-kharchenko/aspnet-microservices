@@ -13,16 +13,16 @@ public interface IBasketRepository
     /// <param name="userName">The user name</param>
     /// <returns>The user's basket</returns>
     Task<ShoppingCart?> GetBasketAsync(string? userName);
-    
+
     /// <summary>
     /// Update the basket
     /// </summary>
     /// <param name="basket">The new basket</param>
     /// <returns>The updated basket</returns>
     Task<ShoppingCart?> UpdateBasketAsync(ShoppingCart basket);
-    
+
     /// <summary>
-    /// Delete the basket by the user name from redis distributed db. 
+    /// Delete the basket by the user name from redis distributed db.
     /// </summary>
     /// <param name="userName">The user name</param>
     Task DeleteBasketAsync(string userName);

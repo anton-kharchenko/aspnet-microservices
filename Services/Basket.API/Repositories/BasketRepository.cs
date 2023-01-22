@@ -28,7 +28,7 @@ public class BasketRepository : IBasketRepository
     /// <inheritdoc />
     public async Task DeleteBasketAsync(string userName)
     {
-        await _redisCache.RemoveAsync(userName);
+        await _redisCache.RemoveAsync(userName).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

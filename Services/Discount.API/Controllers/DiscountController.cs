@@ -22,9 +22,9 @@ public class DiscountController : ControllerBase
     {
         _discountRepository = discountRepository;
     }
-    
+
     /// <summary>
-    /// Get discount by product name 
+    /// Get discount by product name
     /// </summary>
     /// <param name="productName">The name of product that need to get discount</param>
     /// <returns>The coupon</returns>
@@ -32,7 +32,7 @@ public class DiscountController : ControllerBase
     [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Coupon>> GetDiscountAsync(string productName)
     {
-        return Ok(await _discountRepository.GetDiscountAsync(productName));
+        return Ok(await _discountRepository.GetDiscountAsync(productName).ConfigureAwait(false));
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class DiscountController : ControllerBase
     [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Coupon>> CreateDiscountAsync([FromBody] Coupon coupon)
     {
-        await _discountRepository.CreateDiscountAsync(coupon);
+        await _discountRepository.CreateDiscountAsync(coupon).ConfigureAwait(false);
         return CreatedAtRoute("GetDiscount", new { productName = coupon.ProductName }, coupon);
     }
 
@@ -57,11 +57,11 @@ public class DiscountController : ControllerBase
     [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Coupon>> UpdateDiscountAsync([FromBody] Coupon coupon)
     {
-        return Ok(await _discountRepository.UpdateDiscountAsync(coupon));
+        return Ok(await _discountRepository.UpdateDiscountAsync(coupon).ConfigureAwait(false));
     }
 
     /// <summary>
-    /// Delete the discount by product name 
+    /// Delete the discount by product name
     /// </summary>
     /// <param name="productName">The name of product that will be deleted discount</param>
     /// <returns>Status of operation</returns>
@@ -69,6 +69,6 @@ public class DiscountController : ControllerBase
     [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<bool>> DeleteDiscountAsync(string productName)
     {
-        return Ok(await _discountRepository.DeleteDiscountAsync(productName));
+        return Ok(await _discountRepository.DeleteDiscountAsync(productName).ConfigureAwait(false));
     }
 }

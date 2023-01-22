@@ -28,14 +28,14 @@ public class OrderController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<OrdersViewModel>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<OrdersViewModel>>> GetOrdersByUserName(string userName)
     {
-        return Ok(await _mediator.Send(new GetOrdersListQuery(userName)));
+        return Ok(await _mediator.Send(new GetOrdersListQuery(userName)).ConfigureAwait(false));
     }
 
     [HttpPost(Name = "CheckoutOrder")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
     {
-        return Ok(await _mediator.Send(command));
+        return Ok(await _mediator.Send(command).ConfigureAwait(false));
     }
 
     [HttpPut(Name = "UpdateOrder")]
@@ -44,7 +44,7 @@ public class OrderController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(command).ConfigureAwait(false);
         return NoContent();
     }
 
@@ -54,7 +54,7 @@ public class OrderController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> DeleteOrder(int id)
     {
-        await _mediator.Send(new DeleteOrderCommand { Id = id });
+        await _mediator.Send(new DeleteOrderCommand { Id = id }).ConfigureAwait(false);
         return NoContent();
     }
 }

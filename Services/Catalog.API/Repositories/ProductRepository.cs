@@ -23,7 +23,7 @@ public class ProductRepository : IProductRepository
     {
         return await _catalogContext.Products.Find(p => true).ToListAsync().ConfigureAwait(false);
     }
-    
+
     /// <inheritdoc />
     public async Task<Product?> GetProductByIdAsync(string id)
     {
@@ -55,7 +55,7 @@ public class ProductRepository : IProductRepository
     /// <inheritdoc />
     public async Task<bool> UpdateProductAsync(Product product)
     {
-        var uprateResult = await _catalogContext.Products.ReplaceOneAsync(p => p.Id == product.Id, product);
+        var uprateResult = await _catalogContext.Products.ReplaceOneAsync(p => p.Id == product.Id, product).ConfigureAwait(false);
 
         return uprateResult.IsAcknowledged && uprateResult.MatchedCount > 0;
     }

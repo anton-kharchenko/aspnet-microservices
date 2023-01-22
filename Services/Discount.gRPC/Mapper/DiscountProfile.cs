@@ -5,7 +5,7 @@ using Discount.gRPC.Protos;
 namespace Discount.gRPC.Mapper;
 
 /// <summary>
-/// Discount mapping model 
+/// Discount mapping model
 /// </summary>
 public class DiscountProfile : Profile
 {

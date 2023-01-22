@@ -34,7 +34,7 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     private async Task UpdateOrder(UpdateOrderCommand request, Order? orderToUpdate)
     {
         _mapper.Map(request, orderToUpdate, typeof(UpdateOrderCommand), typeof(Order));
-        await _orderRepository.UpdateAsync(orderToUpdate!);
+        await _orderRepository.UpdateAsync(orderToUpdate!).ConfigureAwait(false);
         _logger.LogInformation($"Order {orderToUpdate!.Id} is successfully updated.");
     }
 }
