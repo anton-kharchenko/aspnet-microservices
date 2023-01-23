@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Ordering.Application.Contracts.Infrastructure;
 using Ordering.Application.Models.Email;
 using SendGrid;
@@ -9,9 +10,9 @@ namespace Ordering.Infrastructure.Mail;
 
 public class EmailService : IEmailService
 {
-    public EmailService(EmailSettings emailSettings, ILogger<EmailService> logger)
+    public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
     {
-        EmailSettings = emailSettings;
+        EmailSettings = emailSettings.Value;
         Logger = logger;
     }
 

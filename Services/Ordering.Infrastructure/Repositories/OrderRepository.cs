@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Contracts.Persistence;
 using Ordering.Domain.Entities;
 using Ordering.Infrastructure.Data.Context;
-using Ordering.Infrastructure.Repository;
 
 #endregion
 

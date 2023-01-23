@@ -1,14 +1,10 @@
-﻿#region
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Application.Contracts.Persistence;
 using Ordering.Domain.Common;
 using Ordering.Infrastructure.Data.Context;
 
-#endregion
-
-namespace Ordering.Infrastructure.Repository;
+namespace Ordering.Infrastructure.Repositories;
 
 public class Repository<T> : IRepository<T> where T : EntityBase
 {

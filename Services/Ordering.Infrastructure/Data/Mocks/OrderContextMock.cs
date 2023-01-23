@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
-using Ordering.Domain.Entities;
+﻿using Ordering.Domain.Entities;
 using Ordering.Infrastructure.Data.Context;
 
 namespace Ordering.Infrastructure.Data.Mocks;
 
-public class OrderContextMock
+public static class OrderContextMock
 {
-    public static async Task MockDataAsync(OrderContext context, ILogger<OrderContextMock> logger)
+    public static async Task MockDataAsync(OrderContext context)
     {
         if (!context.Orders!.Any())
         {
