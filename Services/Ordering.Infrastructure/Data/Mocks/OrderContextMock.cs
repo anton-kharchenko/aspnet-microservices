@@ -26,7 +26,18 @@ public static class OrderContextMock
                 EmailAddress = "gumb1t97@gmail.com",
                 AddressLine = "Sofia",
                 Country = "Bulguria",
-                TotalPrice = 350
+                TotalPrice = 350,
+                CardName = "Test",
+                CardNumber = "Privat",
+                Cvv = "123",
+                ZipCode = "1619",
+                State = "Sofia",
+                PaymentMethod = 1,
+                Expiration = DateTime.Now.AddDays(365).ToLongDateString(),
+                CreatedBy = new Guid().ToString(),
+                CreatedDate = DateTime.Now,
+                LastModifiedBy = new Guid().ToString(),
+                LastModifiedDate = DateTime.Now
             }
         };
     }
