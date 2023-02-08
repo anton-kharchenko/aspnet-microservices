@@ -15,7 +15,7 @@ public static class ApplicationExtensions
     {
         app.MapGrpcService<DiscountService>();
     }
-    
+
     /// <summary>
     /// Add first migrations before application connected with db.
     /// </summary>

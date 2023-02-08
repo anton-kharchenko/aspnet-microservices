@@ -8,7 +8,7 @@ public class ValidationException : ApplicationException
     {
         Errors = new Dictionary<string, string[]>();
     }
-    
+
     public ValidationException(IEnumerable<ValidationFailure> failures)
         : this()
     {

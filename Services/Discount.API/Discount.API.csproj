@@ -8,16 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dapper" Version="2.0.123" />
-        <PackageReference Include="Npgsql" Version="7.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Dapper" Version="2.0.123"/>
+        <PackageReference Include="Npgsql" Version="7.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

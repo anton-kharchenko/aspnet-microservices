@@ -5,9 +5,9 @@ namespace Ordering.Application.Features.Commands.CheckoutOrder;
 public class CheckoutOrderCommand : IRequest<int>
 {
     public string UserName { get; set; } = default!;
-    public decimal TotalPrice { get; set; } 
+    public double TotalPrice { get; set; }
 
-    // BillingAddress 
+    // BillingAddress
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public string EmailAddress { get; set; } = default!;

@@ -51,13 +51,13 @@ public class BasketController : ControllerBase
     {
         foreach (var shoppingCartItem in basket.Items)
         {
-            var coupon = await _discountGrpcService.GetDiscount(shoppingCartItem.ProductName);
+            var coupon = await _discountGrpcService.GetDiscountAsync(shoppingCartItem.ProductName).ConfigureAwait(false);
             shoppingCartItem.Price -= coupon.Amount;
         }
-        
+
         return Ok(await _repository.UpdateBasketAsync(basket).ConfigureAwait(false));
     }
-    
+
     /// <summary>
     /// Delete basket.
     /// </summary>

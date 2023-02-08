@@ -28,10 +28,10 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
     {
         var orderEntity = _mapper.Map<Order>(request);
         var order = await _orderRepository.AddAsync(orderEntity).ConfigureAwait(false);
-        
+
         _logger.LogInformation($"Order {order.Id} is successfully created.");
         await SendMailAsync(order).ConfigureAwait(false);
-        
+
         return order.Id;
     }
 
@@ -43,7 +43,7 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
             Body = "Order was created.",
             Subject = "Order was created"
         };
-        
+
         try
         {
             await _emailService.SendEmailAsync(email).ConfigureAwait(false);

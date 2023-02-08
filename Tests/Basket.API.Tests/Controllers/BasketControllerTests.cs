@@ -22,16 +22,16 @@ public class BasketControllerTests
         var discountGrpcService = _fixture.Freeze<Mock<DiscountGrpcService>>();
         _basketController =  new BasketController(_basketRepository.Object, discountGrpcService.Object);
     }
-    
+
     [Fact]
     public async Task GetBasketShouldReturnOkResponseWhenDataFound()
     {
-        var basket = _fixture.Create<ShoppingCart>(); 
+        var basket = _fixture.Create<ShoppingCart>();
         var userName = _fixture.Create<string>();
         _basketRepository.Setup(i => i.GetBasketAsync(userName)).ReturnsAsync(basket);
 
         var result = await _basketController.GetBasketAsync(userName).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -41,8 +41,8 @@ public class BasketControllerTests
             .And.BeOfType(basket.GetType());
         _basketRepository.Verify(i => i.GetBasketAsync(userName), Times.Once);
     }
-    
-    
+
+
     [Fact]
     public async Task UpdateBasketShouldReturnOkResponseWhenDataValid()
     {
@@ -50,7 +50,7 @@ public class BasketControllerTests
         _basketRepository.Setup(i => i.UpdateBasketAsync(basket)).ReturnsAsync(basket);
 
         var result = await _basketController.UpdateBasketAsync(basket).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
@@ -60,16 +60,16 @@ public class BasketControllerTests
             .And.BeOfType(basket.GetType());
         _basketRepository.Verify(i => i.UpdateBasketAsync(basket), Times.Once);
     }
-    
-    
+
+
     [Fact]
     public async Task DeleteBasketShouldReturnOkWhenDeletedRecord()
     {
         var userName = _fixture.Create<string>();
         _basketRepository.Setup(x => x.DeleteBasketAsync(userName));
-        
+
         var result = await _basketController.DeleteBasketAsync(userName).ConfigureAwait(false);
-        
+
         result.Should().NotBeNull();
     }
 }

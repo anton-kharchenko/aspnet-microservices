@@ -7,7 +7,7 @@ using Grpc.Core;
 namespace Discount.gRPC.Services;
 
 /// <summary>
-/// Discount service for gRPC connections 
+/// Discount service for gRPC connections
 /// </summary>
 public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
 {
@@ -40,7 +40,7 @@ public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
         var coupon = await _repository.GetDiscountAsync(request.ProductName).ConfigureAwait(false);
         if (coupon is null)
             throw new RpcException(new Status(StatusCode.NotFound, $"Discount with product name={request.ProductName} is not found."));
-        
+
         _logger.LogInformation($"Discount retrieved Product name: {coupon.ProductName}, Amount: {coupon.Amount}, Description: {coupon.Description}");
         return _mapper.Map<CouponModel>(coupon);
     }

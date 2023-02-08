@@ -30,15 +30,15 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
             _logger.LogError("Order not exists on database.");
             throw new NotFoundException(nameof(Order), request.Id);
         }
-        
-        await DeleteOrderById(orderToDelete);
+
+        await DeleteOrderById(orderToDelete).ConfigureAwait(false);
 
         return Unit.Value;
     }
 
     private async Task DeleteOrderById(Order orderToDelete)
     {
-        await _orderRepository.DeleteAsync(orderToDelete);
+        await _orderRepository.DeleteAsync(orderToDelete).ConfigureAwait(false);
         _logger.LogInformation($"Order {orderToDelete.Id} is successfully deleted.");
     }
 }

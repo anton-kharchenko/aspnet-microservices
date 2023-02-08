@@ -23,7 +23,7 @@ public class DiscountGrpcService
     /// </summary>
     /// <param name="productName">The product name that need to get the discount</param>
     /// <returns>Model of discount for this product</returns>
-    public async Task<CouponModel> GetDiscount(string productName)
+    public async Task<CouponModel> GetDiscountAsync(string productName)
     {
         var discountRequest = new GetDiscountRequest { ProductName = productName };
         return await _discountProtoServiceClient.GetDiscountAsync(discountRequest);

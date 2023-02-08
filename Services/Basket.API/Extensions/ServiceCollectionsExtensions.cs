@@ -19,7 +19,7 @@ public static class ServiceCollectionsExtensions
             opt.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
         });
     }
-    
+
     /// <summary>
     /// Add and configure Swagger to application
     /// </summary>
@@ -30,7 +30,7 @@ public static class ServiceCollectionsExtensions
     }
 
     /// <summary>
-    /// Realization of repository pattern 
+    /// Realization of repository pattern
     /// </summary>
     public static void AddRepositories(this IServiceCollection services)
     {

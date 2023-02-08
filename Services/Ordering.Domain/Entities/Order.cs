@@ -5,7 +5,7 @@ namespace Ordering.Domain.Entities;
 public class Order : EntityBase
 {
     public string UserName { get; set; } = default!;
-    public decimal TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
 
     // BillingAddress
     public string FirstName { get; set; } = default!;
@@ -13,7 +13,7 @@ public class Order : EntityBase
     public string EmailAddress { get; set; } = default!;
     public string AddressLine { get; set; } = default!;
     public string Country { get; set; } = default!;
-    public string State { get; set; } = default!;
+    public string  State { get; set; } = default!;
     public string ZipCode { get; set; } = default!;
 
     // Payment
