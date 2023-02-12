@@ -1,23 +1,21 @@
 ﻿using Basket.API.Repositories;
 using Basket.API.Services;
 using Discount.gRPC.Protos;
+using MassTransit;
 
 namespace Basket.API.Extensions;
 
 /// <summary>
-///     Contains application service collection.
+/// Contains application service collection.
 /// </summary>
 public static class ServiceCollectionsExtensions
 {
     /// <summary>
-    ///     Add and configure distributed redis system to application.
+    /// Add and configure distributed redis system to application.
     /// </summary>
     public static void AddRedis(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddStackExchangeRedisCache(opt =>
-        {
-            opt.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
-        });
+        services.AddStackExchangeRedisCache(opt => { opt.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString"); });
     }
 
     /// <summary>
@@ -42,9 +40,28 @@ public static class ServiceCollectionsExtensions
     /// </summary>
     public static void AddGrpcClient(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o=>
-            o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]!)
+        services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
+            o =>
+                o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]!)
         );
         services.AddScoped<DiscountGrpcService>();
+    }
+
+    /// <summary>
+    /// Adding message broker to app
+    /// </summary>
+    public static void AddRabbitMq(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddMassTransit(
+            config => {
+                config.UsingRabbitMq(
+                    (_, cfg) => {
+                        cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                    }
+                );
+            }
+        );
+
+        services.AddMassTransitHostedService();
     }
 }
