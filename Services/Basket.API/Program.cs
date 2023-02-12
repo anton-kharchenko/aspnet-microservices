@@ -12,6 +12,7 @@ builder.Services.AddRedis(builder.Configuration);
 builder.Services.AddGrpcClient(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddRabbitMq(builder.Configuration);
+builder.Services.AddMapping();
 
 var app = builder.Build();
 

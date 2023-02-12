@@ -55,13 +55,19 @@ public static class ServiceCollectionsExtensions
         services.AddMassTransit(
             config => {
                 config.UsingRabbitMq(
-                    (_, cfg) => {
-                        cfg.Host(configuration["EventBusSettings:HostAddress"]);
-                    }
+                    (_, cfg) => { cfg.Host(configuration["EventBusSettings:HostAddress"]); }
                 );
             }
         );
 
         services.AddMassTransitHostedService();
+    }
+
+    /// <summary>
+    /// Add Mapping services
+    /// </summary>
+    public static void AddMapping(this IServiceCollection services)
+    {
+        services.AddAutoMapper(typeof(Program));
     }
 }

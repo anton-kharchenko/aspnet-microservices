@@ -1,9 +1,11 @@
 using AutoFixture;
+using AutoMapper;
 using Basket.API.Controllers;
 using Basket.API.Entities;
 using Basket.API.Repositories;
 using Basket.API.Services;
 using FluentAssertions;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -20,7 +22,10 @@ public class BasketControllerTests
         _fixture = new Fixture();
         _basketRepository = _fixture.Freeze<Mock<IBasketRepository>>();
         var discountGrpcService = _fixture.Freeze<Mock<DiscountGrpcService>>();
-        _basketController =  new BasketController(_basketRepository.Object, discountGrpcService.Object);
+        var endpoint = _fixture.Freeze<Mock<IPublishEndpoint>>();
+        var mapper = _fixture.Freeze<Mock<IMapper>>();
+
+        _basketController = new BasketController(_basketRepository.Object, mapper.Object, endpoint.Object, discountGrpcService.Object);
     }
 
     [Fact]
@@ -36,9 +41,9 @@ public class BasketControllerTests
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
         result.Result.As<OkObjectResult>().Value
-            .Should()
-            .NotBeNull()
-            .And.BeOfType(basket.GetType());
+              .Should()
+              .NotBeNull()
+              .And.BeOfType(basket.GetType());
         _basketRepository.Verify(i => i.GetBasketAsync(userName), Times.Once);
     }
 
@@ -55,9 +60,9 @@ public class BasketControllerTests
         result.Should().BeAssignableTo<ActionResult<ShoppingCart?>>();
         result.Result.Should().BeAssignableTo<OkObjectResult>();
         result.Result.As<OkObjectResult>().Value
-            .Should()
-            .NotBeNull()
-            .And.BeOfType(basket.GetType());
+              .Should()
+              .NotBeNull()
+              .And.BeOfType(basket.GetType());
         _basketRepository.Verify(i => i.UpdateBasketAsync(basket), Times.Once);
     }
 

@@ -1,9 +1,9 @@
-﻿namespace EventBus.Messages.Events;
+﻿namespace Basket.API.Entities;
 
-public class BasketCheckoutEvent : IntegrationBaseEvent
+public class BasketCheckout
 {
     public string UserName { get; set; } = default!;
-    public decimal TotalPrice { get; set; }
+    public double TotalPrice { get; set; }
 
     // BillingAddress
     public string FirstName { get; set; } = default!;
