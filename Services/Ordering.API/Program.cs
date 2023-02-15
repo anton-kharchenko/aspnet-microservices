@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddRabbitMq(builder.Configuration);
+builder.Services.AddMapper();
 
 var app = builder.Build();
 
