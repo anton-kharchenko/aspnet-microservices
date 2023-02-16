@@ -6,5 +6,5 @@ public abstract class EntityBase
     public string CreatedBy { get; set; } = default!;
     public DateTime CreatedDate { get; set; }
     public string LastModifiedBy { get; set; } = default!;
-    public DateTime LastModifiedDate { get; set; }
+    public DateTime LastModifiedDate { get; set; } = DateTime.UtcNow;
 }

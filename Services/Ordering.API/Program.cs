@@ -14,6 +14,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddRabbitMq(builder.Configuration);
 builder.Services.AddMapper();
+builder.Services.AddConsumers();
 
 var app = builder.Build();
 

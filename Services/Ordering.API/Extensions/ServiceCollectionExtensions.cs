@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Adding message broker to app
     /// </summary>
+    [Obsolete("Obsolete")]
     public static void AddRabbitMq(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMassTransit(
@@ -35,5 +36,13 @@ public static class ServiceCollectionExtensions
     public static void AddMapper(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+    }
+
+    /// <summary>
+    /// Add the consumers
+    /// </summary>
+    public static void AddConsumers(this IServiceCollection services)
+    {
+        services.AddScoped<BasketCheckoutConsumer>();
     }
 }
