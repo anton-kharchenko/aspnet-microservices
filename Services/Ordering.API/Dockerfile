@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Services/Ordering.API/Ordering.API.csproj", "Services/Ordering.API/"]
+COPY ["BuildingBlocks/EventBus.Messages/EventBus.Messages.csproj", "BuildingBlocks/EventBus.Messages/"]
 COPY ["Services/Ordering.Application/Ordering.Application.csproj", "Services/Ordering.Application/"]
 COPY ["Services/Ordering.Domain/Ordering.Domain.csproj", "Services/Ordering.Domain/"]
 COPY ["Services/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Services/Ordering.Infrastructure/"]

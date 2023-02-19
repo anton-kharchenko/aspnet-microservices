@@ -30,7 +30,7 @@ services:
   orderdb:
     container_name: orderdb
     environment:
-      SA_PASSWORD: "A12Z5!GUMb1t"
+      MSSQL_SA_PASSWORD : "A12Z5!GUMb1t"
       ACCEPT_EULA: "Y"
     restart: always
     ports:
@@ -83,8 +83,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=basketdb:6379"
       - "GrpcSettings:DiscountUrl=http://discount.grpc"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - basketdb
+      - rabbitmq
     ports:
       - "8001:80"
     volumes:
@@ -116,7 +118,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;Encrypt=False;TrustServerCertificate=False;"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - orderdb
+      - rabbitmq
     ports:
       - "8004:80"
