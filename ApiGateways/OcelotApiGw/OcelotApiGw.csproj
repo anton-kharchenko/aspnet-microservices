@@ -10,4 +10,13 @@
       <PackageReference Include="Ocelot" Version="18.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="ocelot.Development.json">
+        <DependentUpon>ocelot.json</DependentUpon>
+      </Content>
+      <Content Update="ocelot.Local.json">
+        <DependentUpon>ocelot.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+
 </Project>
