@@ -50,6 +50,7 @@ public static class ServiceCollectionsExtensions
     /// <summary>
     /// Adding message broker to app
     /// </summary>
+    [Obsolete]
     public static void AddRabbitMq(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMassTransit(
