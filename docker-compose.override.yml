@@ -125,7 +125,7 @@ services:
     ports:
       - "8004:80"
 
-  ocoletapigw:
+  ocelotapigw:
     container_name: ocelotapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
