@@ -7,8 +7,8 @@ public class BasketItemExtendedModel
     public decimal Price { get; set; }
     public string ProductId { get; set; } = default!;
     public string ProductName { get; set; } = default!;
-    public string Category { get; set; }
-    public string Summary { get; set; }
-    public string Description { get; set; }
-    public string ImageFile { get; set; }
+    public string Category { get; set; } = default!;
+    public string Summary { get; set; } = default!;
+    public string Description { get; set; } = default!;
+    public string ImageFile { get; set; } = default!;
 }

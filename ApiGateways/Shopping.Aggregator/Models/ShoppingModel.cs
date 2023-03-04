@@ -2,7 +2,7 @@
 
 public class ShoppingModel
 {
-    public string UserName { get; set; }
-    public BasketModel BasketWithProducts { get; set; }
-    public IEnumerable<OrderResponseModel> Orders { get; set; }
+    public string UserName { get; set; } = default!;
+    public BasketModel BasketWithProducts { get; set; } = default!;
+    public IEnumerable<OrderResponseModel> Orders { get; set; } = default!;
 }
