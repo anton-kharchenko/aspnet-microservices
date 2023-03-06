@@ -32,7 +32,7 @@ public class ShoppingController : ControllerBase
 
         var basket = await _basketService.GetBasket(userName).ConfigureAwait(false);
 
-        foreach (var item in basket.Items)
+        foreach (var item in basket!.Items)
         {
             var product = await _catalogService.GetCatalog(item.ProductId).ConfigureAwait(false);
 
